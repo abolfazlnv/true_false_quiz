@@ -1,6 +1,4 @@
 
-This is a true-false-quiz project implemented using Django.
-
 ## Run Locally
 
 Clone the project
@@ -37,14 +35,15 @@ Go to the backend directory
   cd backend
 ```
 
+Migrations
+```bash
+  python ./manage.py makemigrations
+  python ./manage.py migrate
+```
+
 Start the server
 
 ```bash
   python ./manage.py runserver
 ```
-
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
 
