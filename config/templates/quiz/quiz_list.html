@@ -1,0 +1,91 @@
+{% extends "base-login.html" %}
+{% block body %}
+<main class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center">
+    <style>
+    .cascading-right {
+    }
+
+    @media (max-width: 991.98px) {
+        .cascading-right {
+        margin-right: 0;
+        }
+    }
+    </style>
+    <div class="cascading-right mx-auto w-50 mb-3" style="
+    background: hsla(0, 0%, 100%, 0.55);
+    backdrop-filter: blur(30px);
+    ">
+        <div class="card-body shadow-5 w-100">
+            <div class="d-flex justify-content-between">
+                <span>qq{{ user.first_name }} {{ user.last_name }}</span>
+                <a href="{% url 'logout' %}">
+                    <button class="btn btn-sm btn-danger">خروج</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="cascading-right w-50 mx-auto" style="
+        background: hsla(0, 0%, 100%, 0.55);
+        backdrop-filter: blur(30px);
+        ">
+        <div class="card-body p-5 shadow-5 text-center">
+        <h2 class="fw-bold">لیست</h2>
+        <div class="mb-5 text-small fw-lighter">
+            به سایت رای گیری خوش آمدید
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">عنوان</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz in object_list %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ quiz }}</td>
+                    <td>
+                        {% if answered == True %}
+                            <button class="btn btn-sm btn-info fw-lighter">شما قبلاً شرکت کرده اید</button>
+                        {% else %}
+                            <a href="{% url "quiz_detail" quiz.pk %}">
+                                <button class="btn btn-sm btn-success">شرکت</button>
+                            </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</main>
+{% if form.errors %}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    <div class="toast align-items-center text-white bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                رمز عبور یا نام کاربری مطابقت ندارد
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% if messages %}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    {% for message in messages %}
+    <div class="toast align-items-center text-white bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock body %}

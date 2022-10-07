@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ quiz.title }}</h1>
+<div class="essay">
+{{ quiz.content|linebreaksbr }}
+</div>
+<hr>
+<h2>
+Ready for your quiz on {{ quiz.title }}?
+</h2>
+<p><a href="{% url "question_detail" view.first_question.pk %}">Begin</a></p>
+{% endblock body %}

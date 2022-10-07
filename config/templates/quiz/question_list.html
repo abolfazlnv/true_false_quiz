@@ -1,0 +1,79 @@
+{% extends "base-login.html" %}
+{% block body %}
+<main class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column justify-content-center">
+    <style>
+    .cascading-right {
+    }
+
+    @media (max-width: 991.98px) {
+        .cascading-right {
+        margin-right: 0;
+        }
+    }
+    </style>
+    <div class="cascading-right mx-auto w-50 mb-3" style="
+    background: hsla(0, 0%, 100%, 0.55);
+    backdrop-filter: blur(30px);
+    ">
+        <div class="card-body shadow-5 w-100">
+            <div class="d-flex justify-content-between">
+                <span>qq{{ user.first_name }} {{ user.last_name }}</span>
+                <a href="#">
+                    <button class="btn btn-sm btn-danger">خروج</button>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="cascading-right w-50 mx-auto" style="
+        background: hsla(0, 0%, 100%, 0.55);
+        backdrop-filter: blur(30px);
+        ">
+        <div class="card-body p-5 shadow-5">
+        <h2 class="fw-bold text-center">لیست</h2>
+        <div class="mb-5 text-small text-center fw-lighter">
+            به سایت رای گیری خوش آمدید
+        </div>
+            <form method="POST" action="{% url "answer_reader" %}">
+                {% csrf_token %}
+                <input type="text" name="quiz" value="{{quiz}}" hidden/>
+                {% for question in object_list %}
+                        <div class="">
+                            {{ question }}
+                        </div>
+                        {{ request.contextt }}
+                        {% for i in request.contextt %}
+                        test {{ i}}
+                        {% endfor %}
+                        <!-- Default checked radio -->
+                        <div class="form-check">
+                            <input class="form-check-input" {{ ss }} type="radio" name="answer-{{question.pk}}" value="True" id="answer-{{question.pk}}" {{ view.kwargs.q_1 }} {% if q_1 == 'True' %}checked{% endif %}/>
+                            <label class="form-check-label" for="answer-{{question.pk}}">موافقم</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="answer-{{question.pk}}" value="False" id="answer-{{question.pk}}"/>
+                            <label class="form-check-label" for="answer-{{question.pk}}">مخالفم</label>
+                        </div>
+                        <hr />
+                {% endfor %}
+                <button type="submit" class="btn-submit-login btn btn-primary btn-block mb-3">
+                    ثبت آراء
+                </button>
+            </form>
+        </div>
+    </div>
+</main>
+{% if messages %}
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+    {% for message in messages %}
+    <div class="toast align-items-center text-white bg-primary border-0 show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ message }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock body %}

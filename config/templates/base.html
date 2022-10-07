@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+{% comment %} <link href='https://fonts.googleapis.com/css?family=Merriweather|Oswald:400,700,300' rel='stylesheet' type='text/css'> {% endcomment %}
+<link href="{% static 'css/mdb.rtl.min.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'fonts/vazir.css' %}" rel='stylesheet' type='text/css'>
+<link href="{% static 'css/main.css' %}" rel='stylesheet' type='text/css'>
+	{% block head %}
+	{% endblock head %}
+</head>
+<body class="text-center">
+
+{% if messages %}
+<div class="messages">
+    {% for message in messages %}
+    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+
+{% block body %}
+{% endblock body %}
+</body>
+<script src="{% static 'js/mdb.min.js' %}"></script>
+</html>

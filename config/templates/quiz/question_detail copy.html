@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block body %}
+<h1>{{ question.quiz }} <span style="font-weight: normal">quiz</span></h1>
+<h2><span style="font-weight: normal">True or false:</span> {{ question }}</h2>
+{{ question.statement}}
+<form method="POST" action="{% url "answer_reader" question.pk %}">
+    
+    {% csrf_token %} 
+{{ form.as_p }}
+<input type="submit">
+</form>
+{% endblock body %}
